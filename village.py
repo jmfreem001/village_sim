@@ -9,19 +9,26 @@ class Village():
     def __init__(self, name, population):
         self.name = name
         self.population = population
-        self.villagers = make_villagers(population)
+        self.villagers = make_villagers(self, population)
+        self.food = population * 2
+        self.shelter = population
         self.morale = 50
-        self.resources = 50
-        self.aggressiveness = 50
+        self.wealth = 250
+        self.might = 5
+        self.defense = 0
+        self.graveyard = []
 
     def check_stats(self):
         """Checks the attributes of selected village"""
         print(self.name)
-        print("Morale: " + str(self.morale))
         print("Population: " + str(self.population))
-        print("Resources: " + str(self.resources))
-        print("Aggressiveness: " + str(self.aggressiveness))
-    
+        print("Wealth: " + str(self.wealth))
+        print("Morale: " + str(self.morale))
+        print("Food:"+ str(self.food))
+        print("Shelter:"+ str(self.shelter))
+        print("Might: " + str(self.might))
+        print("Defense: "+ str(self.defense))
+
     def pop_bin(self):
         """counts each gender and each age group"""
         male = 0
@@ -45,11 +52,12 @@ class Village():
 
 
 
-def make_villagers(n):
+def make_villagers(self, n):
     """Creates n number of people objects that are residents of the village."""
     villagers = []
     for i in range(0, n):
-        x = rand_person()
+        # need to assign village to person for grave yard and naming purposes. 
+        x = rand_person(self)
         villagers.append(x)
     return villagers
 

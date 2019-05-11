@@ -2,20 +2,28 @@ from village import *
 
 class Person():
     """Represents a person"""
-    def __init__(self, name, age, gender, alive=True):
+    def __init__(self, name, age, gender, village, alive=True):
         self.name = name
         self.age = age
         self.gender = gender
         self.alive = alive
+        self.village = village
     
     def __str__(self):
         if self.alive:
-            return '{self.name}({self.gender}) is {self.age}.'.format(self=self)
+            return '{self.name} of {self.village.name}({self.gender}) is {self.age}.'.format(self=self)
         else:
-            return '{self.name}({self.gender}) died at age {self.age}.'.format(self=self)
+            return '{self.name} of {self.village.name}({self.gender}) died at age {self.age}.'.format(self=self)
     def kill(self):
         """simulates death of a Person"""
+        # set as not alive
         self.alive = False
+        self.village.population -= 1
+        print("{self.name} has died").format(self=self)
+        # remove from villagers
+        self.village.villagers.remove(self)
+        # Add person to graveyard
+        self.village.graveyard.append(self)
 
 def rand_gen():
     """Randomly assigns a gender"""
@@ -43,9 +51,10 @@ def rand_list_item(file):
         item = lines[x]
         return item
 
-def rand_person():
+def rand_person(village):
     """Randomly generates a simulation of a person"""
     gen = rand_gen()
     age = randint(0, 55)
     name = rand_name(gen)
-    return Person(name, age, gen)
+    vil = village
+    return Person(name, age, gen, vil)
