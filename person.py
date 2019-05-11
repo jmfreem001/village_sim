@@ -19,7 +19,7 @@ class Person():
         # set as not alive
         self.alive = False
         self.village.population -= 1
-        print("{self.name} has died").format(self=self)
+        print("{self.name} of {self.village.name} has died").format(self=self)
         # remove from villagers
         self.village.villagers.remove(self)
         # Add person to graveyard

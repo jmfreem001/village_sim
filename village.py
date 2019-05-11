@@ -20,7 +20,7 @@ class Village():
 
     def check_stats(self):
         """Checks the attributes of selected village"""
-        print(self.name)
+        print(self.name + "\n")
         print("Population: " + str(self.population))
         print("Wealth: " + str(self.wealth))
         print("Morale: " + str(self.morale))
@@ -28,6 +28,7 @@ class Village():
         print("Shelter:"+ str(self.shelter))
         print("Might: " + str(self.might))
         print("Defense: "+ str(self.defense))
+        print("")
 
     def pop_bin(self):
         """counts each gender and each age group"""
@@ -61,6 +62,15 @@ def make_villagers(self, n):
         villagers.append(x)
     return villagers
 
-
+def make_village(n):
+    """ Creates n number of village objects with a population of"""
+    villages =[]
+    for i in range(0,n):
+        # Get random village name
+        name = rand_list_item('vilnames.txt')
+        population = randint(10,40)
+        x = Village(name, population)
+        villages.append(x)
+    return villages
 
 
